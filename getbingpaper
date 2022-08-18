@@ -1,0 +1,7 @@
+#!/bin/bash
+bingurl=$(curl https://cn.bing.com/HPImageArchive.aspx\?format\=js\&idx\=0\&n\=1\&nc\=1614319565639\&pid\=hp\&FORM\=BEHPTB\&uhd\=1\&uhdwidth\=3840\&uhdheight\=2160 |jq '.images'|jq '.[]'|jq -r '.url')
+echo $bingurl
+name=$(curl https://cn.bing.com/HPImageArchive.aspx\?format\=js\&idx\=0\&n\=1\&nc\=1614319565639\&pid\=hp\&FORM\=BEHPTB\&uhd\=1\&uhdwidth\=3840\&uhdheight\=2160 |jq '.images'|jq '.[]'|jq -r '.title')
+baseurl="https://cn.bing.com/"
+echo "$baseurl$bingurl"
+wget -O /mnt/d/00inbox/bingWallPaper/$(date +"%Y-%m-%d")-$name.jpg $baseurl$bingurl
